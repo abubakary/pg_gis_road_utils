@@ -1,0 +1,70 @@
+{
+  "name": "pg_gis_road_utils",
+  "abstract": "Advanced GIS utilities for road network chainage operations",
+  "description": "PostgreSQL extension providing high-performance chainage-based operations for road networks including line cutting, point calibration, and segment extraction. Converted from JNI/Java implementation to native PostgreSQL C extension using GEOS library.",
+  "version": "1.0.0",
+  "maintainer": [
+    "Tanzania Mining Commission <gis@tehama.go.tz>"
+  ],
+  "license": "mit",
+  "provides": {
+    "pg_gis_road_utils": {
+      "file": "pg_gis_road_utils--1.0.0.sql",
+      "docfile": "README.md",
+      "version": "1.0.0",
+      "abstract": "Road network chainage operations"
+    }
+  },
+  "requires": {
+    "PostgreSQL": "12.0.0",
+    "PostGIS": "3.0.0"
+  },
+  "recommends": {
+    "PostgreSQL": "15.0.0",
+    "PostGIS": "3.3.0"
+  },
+  "prereqs": {
+    "runtime": {
+      "requires": {
+        "PostgreSQL": "12.0",
+        "PostGIS": "3.0"
+      }
+    },
+    "build": {
+      "requires": {
+        "GEOS": "3.8"
+      }
+    }
+  },
+  "resources": {
+    "homepage": "https://github.com/tehama/pg_gis_road_utils",
+    "bugtracker": {
+      "web": "https://github.com/tehama/pg_gis_road_utils/issues"
+    },
+    "repository": {
+      "url": "git://github.com/tehama/pg_gis_road_utils.git",
+      "web": "https://github.com/tehama/pg_gis_road_utils",
+      "type": "git"
+    }
+  },
+  "tags": [
+    "gis",
+    "postgis",
+    "roads",
+    "chainage",
+    "tanzania",
+    "spatial",
+    "geometry",
+    "road network",
+    "geos",
+    "transportation",
+    "infrastructure",
+    "line cutting",
+    "point calibration"
+  ],
+  "generated_by": "Tanzania Mining Commission - TEHAMA",
+  "meta-spec": {
+    "version": "1.0.0",
+    "url": "https://pgxn.org/spec/"
+  }
+}

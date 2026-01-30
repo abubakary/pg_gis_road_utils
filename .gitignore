@@ -1,0 +1,19 @@
+# Build artifacts
+*.o
+*.so
+*.dll
+*.dylib
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Test databases
+test_db/
+*.sql.bak
+
+# Distribution
+*.zip
+*.tar.gz
