@@ -3,7 +3,7 @@
 EXTENSION = pg_gis_road_utils
 DATA = pg_gis_road_utils--1.0.0.sql
 MODULE_big = pg_gis_road_utils
-OBJS = pg_gis_road_utils.o
+OBJS = pg_gis_road_utils.o shapefile_reader.o
 
 # GEOS library configuration
 PG_CPPFLAGS = -I$(shell geos-config --includes) -I$(shell pkg-config --cflags geos)

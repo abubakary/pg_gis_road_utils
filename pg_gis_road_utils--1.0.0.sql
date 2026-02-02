@@ -188,3 +188,86 @@ Example: SELECT * FROM generate_kilometer_posts(geom, 1.0, 0.0) WHERE km_post <=
 -- Grant permissions
 
 
+
+-- ============================================
+-- SHAPEFILE READER FUNCTIONS
+-- ============================================
+
+-- ============================================
+-- Function: read_shapefile_wkt
+-- ============================================
+-- Reads a shapefile and returns records with WKT geometry
+-- Returns TABLE: (record_num INT, attributes TEXT[], geom_wkt TEXT)
+
+CREATE OR REPLACE FUNCTION read_shapefile_wkt(
+    shapefile_path TEXT
+)
+RETURNS TABLE (
+    record_num INTEGER,
+    attributes TEXT[],
+    geom_wkt TEXT
+)
+AS 'MODULE_PATHNAME', 'read_shapefile_wkt'
+LANGUAGE C IMMUTABLE STRICT;
+
+COMMENT ON FUNCTION read_shapefile_wkt IS
+'Read shapefile and return records with WKT geometry.
+Arguments:
+  shapefile_path - Path to shapefile without extension (e.g., ''/data/roads'')
+Returns:
+  record_num - Record number from shapefile
+  attributes - Array of attribute values from DBF file
+  geom_wkt - Geometry in Well-Known Text format
+Example:
+  SELECT * FROM read_shapefile_wkt(''/data/tanzania_roads'');
+  SELECT record_num, attributes[1] AS name, geom_wkt 
+  FROM read_shapefile_wkt(''/data/districts'');';
+
+-- ============================================
+-- Function: read_shapefile_wkb
+-- ============================================
+-- Reads a shapefile and returns records with WKB geometry
+-- Returns TABLE: (record_num INT, attributes TEXT[], geom_wkb BYTEA)
+
+CREATE OR REPLACE FUNCTION read_shapefile_wkb(
+    shapefile_path TEXT
+)
+RETURNS TABLE (
+    record_num INTEGER,
+    attributes TEXT[],
+    geom_wkb BYTEA
+)
+AS 'MODULE_PATHNAME', 'read_shapefile_wkb'
+LANGUAGE C IMMUTABLE STRICT;
+
+COMMENT ON FUNCTION read_shapefile_wkb IS
+'Read shapefile and return records with WKB (Well-Known Binary) geometry.
+Arguments:
+  shapefile_path - Path to shapefile without extension
+Returns:
+  record_num - Record number from shapefile
+  attributes - Array of attribute values from DBF file
+  geom_wkb - Geometry in Well-Known Binary format (BYTEA)
+Example:
+  SELECT * FROM read_shapefile_wkb(''/data/tanzania_roads'');
+  SELECT record_num, attributes[1], ST_AsText(geom_wkb::geometry)
+  FROM read_shapefile_wkb(''/data/districts'');';
+
+
+
+-- ============================================
+-- Function: read_shapefile_test
+-- ============================================
+
+CREATE OR REPLACE FUNCTION read_shapefile_test()
+RETURNS TABLE (
+    record_num INTEGER,
+    attributes TEXT[],
+    geom_wkb BYTEA
+)
+AS 'MODULE_PATHNAME', 'read_shapefile_test'
+LANGUAGE C IMMUTABLE STRICT;
+
+COMMENT ON FUNCTION read_shapefile_test IS
+'Returns a small dummy shapefile with 2 records for testing WKB.';
+
